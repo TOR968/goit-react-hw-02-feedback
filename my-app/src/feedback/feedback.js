@@ -48,17 +48,19 @@ class Fedback extends Component {
           </button>
         </div>
         <h2>Statistics</h2>
-        {/* Total === 0 ? <Notification message="No feedback given">.: */}
-        <p>Good:{this.state.good}</p>
-        <p>Neutral:{this.state.neutral}</p>
-        <p>Bad:{this.state.bad}</p>
-        <p>Total: {Object.values(this.state).reduce((a, b) => a + b, 0)}</p>
-        <p>
-          Positive feedback:{' '}
-          {(this.state.good * 100) /
-            Object.values(this.state).reduce((a, b) => a + b, 0)}
-          %
-        </p>
+        {/* Object.values(this.state).reduce((a, b) => a + b, 0) === 0 ? <Notification message="No feedback given">.: */}
+        <div>
+          <p>Good:{this.state.good}</p>
+          <p>Neutral:{this.state.neutral}</p>
+          <p>Bad:{this.state.bad}</p>
+          <p>Total: {Object.values(this.state).reduce((a, b) => a + b, 0)}</p>
+          <p>
+            Positive feedback:{' '}
+            {(this.state.good * 100) /
+              Object.values(this.state).reduce((a, b) => a + b, 0)}
+            %
+          </p>
+        </div>
       </div>
     );
   }
