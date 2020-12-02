@@ -1,31 +1,67 @@
 import React, { Component } from 'react';
+import './feedback.module.css';
 
-class ClassFedback extends Component {
-  //   static defaultProps = {};
-  constructor() {
-    super();
-    //     static propTypes = {};
-    this.state = {
-      good: 0,
-      neutral: 0,
-      bad: 0,
-    };
-  }
+class Fedback extends Component {
+  //   static propTypes = {
+  //     title: T.string,
+  //   };
+
+  static defaultProps = {
+    title: 'Please leave feedback',
+  };
+
+  state = {
+    good: 0,
+    neutral: 0,
+    bad: 0,
+  };
+
+  handleIncrementGood = () => {
+    this.setState(prevState => {
+      return { good: prevState.good + 1 };
+    });
+  };
+  handleIncrementNeutral = () => {
+    this.setState(prevState => {
+      return { neutral: prevState.neutral + 1 };
+    });
+  };
+  handleIncrementBad = () => {
+    this.setState(prevState => {
+      return { bad: prevState.bad + 1 };
+    });
+  };
 
   render() {
     return (
       <div>
         <h2>Please leave feedback</h2>
-        <button type="button">Good</button>
-        <button type="button">Neutral</button>
-        <button type="button">Bad</button>
+        <div>
+          <button type="button" onClick={this.handleIncrementGood}>
+            Good
+          </button>
+          <button type="button" onClick={this.handleIncrementNeutral}>
+            Neutral
+          </button>
+          <button type="button" onClick={this.handleIncrementBad}>
+            Bad
+          </button>
+        </div>
         <h2>Statistics</h2>
-        <span>Good:{this.state.good}</span>
-        <span>Neutral:{this.state.neutral}</span>
-        <span>Bad:{this.state.bad}</span>
+        {/* Total === 0 ? <Notification message="No feedback given">.: */}
+        <p>Good:{this.state.good}</p>
+        <p>Neutral:{this.state.neutral}</p>
+        <p>Bad:{this.state.bad}</p>
+        <p>Total: {Object.values(this.state).reduce((a, b) => a + b, 0)}</p>
+        <p>
+          Positive feedback:{' '}
+          {(this.state.good * 100) /
+            Object.values(this.state).reduce((a, b) => a + b, 0)}
+          %
+        </p>
       </div>
     );
   }
 }
 
-export default ClassFedback;
+export default Fedback;
