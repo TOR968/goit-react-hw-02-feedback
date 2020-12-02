@@ -5,7 +5,7 @@ h2 {
 button {
   margin: 10px;
 }
-
-p {
-  margin-left: 10px;
+li {
+  list-style-type: none;
+  margin-bottom: 10px;
 }
