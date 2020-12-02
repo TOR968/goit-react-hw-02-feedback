@@ -56,8 +56,10 @@ class Fedback extends Component {
           <p>Total: {Object.values(this.state).reduce((a, b) => a + b, 0)}</p>
           <p>
             Positive feedback:{' '}
-            {(this.state.good * 100) /
-              Object.values(this.state).reduce((a, b) => a + b, 0)}
+            {Math.round(
+              (this.state.good * 100) /
+                Object.values(this.state).reduce((a, b) => a + b, 0),
+            )}
             %
           </p>
         </div>
