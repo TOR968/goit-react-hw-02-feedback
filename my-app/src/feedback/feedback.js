@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import './feedback.module.css';
+import ButtonEl from './buttonElem';
 
 class Fedback extends Component {
   //   static propTypes = {
@@ -16,43 +17,33 @@ class Fedback extends Component {
     bad: 0,
   };
 
-  handleIncrementGood = () => {
-    this.setState(prevState => {
-      return { good: prevState.good + 1 };
-    });
-  };
-  handleIncrementNeutral = () => {
-    this.setState(prevState => {
-      return { neutral: prevState.neutral + 1 };
-    });
-  };
-  handleIncrementBad = () => {
-    this.setState(prevState => {
-      return { bad: prevState.bad + 1 };
-    });
-  };
-
   render() {
     return (
       <div>
         <h2>Please leave feedback</h2>
+        {/* <ButtonEl /> */}
         <div>
-          <button type="button" onClick={this.handleIncrementGood}>
-            Good
-          </button>
-          <button type="button" onClick={this.handleIncrementNeutral}>
-            Neutral
-          </button>
-          <button type="button" onClick={this.handleIncrementBad}>
-            Bad
-          </button>
+          {Object.keys(this.state).map(item => (
+            <button
+              type="button"
+              onClick={() => {
+                this.setState(prevState => {
+                  return { [item]: prevState[item] + 1 };
+                });
+              }}
+            >
+              {item[0].toUpperCase() + item.slice(1)}
+            </button>
+          ))}
         </div>
         <h2>Statistics</h2>
         {/* Object.values(this.state).reduce((a, b) => a + b, 0) === 0 ? <Notification message="No feedback given">.: */}
         <ul>
-          <li>Good:{this.state.good}</li>
-          <li>Neutral:{this.state.neutral}</li>
-          <li>Bad:{this.state.bad}</li>
+          {Object.keys(this.state).map(item => (
+            <li>
+              {item[0].toUpperCase() + item.slice(1)}:{this.state[item]}
+            </li>
+          ))}
           <li>Total: {Object.values(this.state).reduce((a, b) => a + b, 0)}</li>
           <li>
             Positive feedback:{' '}
