@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import './feedback.module.css';
-import ButtonEl from './buttonElem';
+// import ButtonEl from './buttonElem';
 
 class Fedback extends Component {
   //   static propTypes = {
@@ -16,6 +16,14 @@ class Fedback extends Component {
     neutral: 0,
     bad: 0,
   };
+
+  countTotalFeedback() {
+    return Object.values(this.state).reduce((a, b) => a + b, 0);
+  }
+
+  countPositiveFeedbackPercentage() {
+    return Math.round((this.state.good * 100) / this.countTotalFeedback());
+  }
 
   render() {
     return (
@@ -44,15 +52,8 @@ class Fedback extends Component {
               {item[0].toUpperCase() + item.slice(1)}:{this.state[item]}
             </li>
           ))}
-          <li>Total: {Object.values(this.state).reduce((a, b) => a + b, 0)}</li>
-          <li>
-            Positive feedback:{' '}
-            {Math.round(
-              (this.state.good * 100) /
-                Object.values(this.state).reduce((a, b) => a + b, 0),
-            )}
-            %
-          </li>
+          <li>Total: {this.countTotalFeedback()}</li>
+          <li>Positive feedback: {this.countPositiveFeedbackPercentage()}%</li>
         </ul>
       </div>
     );
