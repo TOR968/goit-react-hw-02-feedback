@@ -45,7 +45,7 @@ class Fedback extends Component {
           ))}
         </div>
         <h2>Statistics</h2>
-        {/* Object.values(this.state).reduce((a, b) => a + b, 0) === 0 ? <Notification message="No feedback given">.: */}
+        {/*this.countTotalFeedback() === 0 ? <Notification message="No feedback given">.: */}
         <ul>
           {Object.keys(this.state).map(item => (
             <li>
