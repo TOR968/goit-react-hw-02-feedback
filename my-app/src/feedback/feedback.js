@@ -17,6 +17,13 @@ class Fedback extends Component {
     bad: 0,
   };
 
+  changeValueState = e => {
+    const name = e.target.name;
+    this.setState(prevState => {
+      return { [name]: prevState[name] + 1 };
+    });
+  };
+
   countTotalFeedback() {
     return Object.values(this.state).reduce((a, b) => a + b, 0);
   }
@@ -25,34 +32,14 @@ class Fedback extends Component {
     return Math.round((this.state.good * 100) / this.countTotalFeedback());
   }
 
-  changeValueState(item) {
-    this.setState(prevState => {
-      return { [item]: prevState[item] + 1 };
-    });
-  }
-
   render() {
     return (
       <div>
         <h2>Please leave feedback</h2>
         <FeedbackOptions
           options={this.state}
-          onLeaveFeedback={() => {
-            this.changeValueState();
-          }}
+          onLeaveFeedback={this.changeValueState}
         ></FeedbackOptions>
-        {/* <div>
-          {Object.keys(this.state).map(item => (
-            <button
-              type="button"
-              onClick={() => {
-                this.changeValueState(item);
-              }}
-            >
-              {item[0].toUpperCase() + item.slice(1)}
-            </button>
-          ))}
-        </div> */}
         <h2>Statistics</h2>
         {/*this.countTotalFeedback() === 0 ? <Notification message="No feedback given">.: */}
         <ul>
